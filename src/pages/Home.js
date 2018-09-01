@@ -17,7 +17,10 @@ class Home extends Component {
         restaurants: [
           { id: 0, name: restaurantNames[0], ratings: [{user: 1, star: 4}] },
           { id: 1, name: restaurantNames[1], ratings: [{user: 0, star: 3.5}, {user: 1, star: 2.5}] },
-          { id: 2, name: restaurantNames[2], ratings: [{user: 0, star: 0}]}
+          { id: 2, name: restaurantNames[2], ratings: [{user: 0, star: 0}]},
+          { id: 3, name: restaurantNames[3], ratings: [{user: 0, star: 0}]},
+          { id: 4, name: restaurantNames[4], ratings: [{user: 1, star: 0}]},
+          { id: 5, name: restaurantNames[5], ratings: []}
         ]
     }
 

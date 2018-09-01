@@ -1,7 +1,6 @@
 body {
   @extend %full;
   overflow: scroll;
-  min-width: $landscape;
   margin: 0;
   background-color: $bg-color;
   color: $text-color;

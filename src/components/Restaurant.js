@@ -20,7 +20,8 @@ class Restaurant extends Component {
                     <img src={require('img/' + name + '.jpg')} alt={name}/>
                 </div>
                 <div className="card-main-content">
-                    <h4>{name}</h4>
+                    <h3>{name}</h3>
+                    <small>강남역</small>
                     <ReactStars count={5}
                                 size={45}
                                 value={value}
