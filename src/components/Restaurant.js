@@ -15,17 +15,22 @@ class Restaurant extends Component {
 
         return (
         <div className="card">
-            <div className="card-img">
-                <img src={require('img/' + name + '.jpg')} alt={id}/>
+            <div className="card-main">
+                <div className="card-main-media">
+                    <img src={require('img/' + name + '.jpg')} alt={name}/>
+                </div>
+                <div className="card-main-content">
+                    <h4>{name}</h4>
+                    <ReactStars count={5}
+                                size={45}
+                                value={value}
+                                onChange={ratingChanged}
+                                color1={'#e9ecef'}
+                                color2={'#fcc419'} />
+                </div>
             </div>
-            <div className="card-content">
-                <h4>{name}</h4>
-                <ReactStars count={5}
-                            size={42}
-                            value={value}
-                            onChange={ratingChanged}
-                            color1={'#e9ecef'}
-                            color2={'#fcc419'} />
+            <div className="card-footer">
+                <div className="card-footer-button">안 가봤어요</div>
             </div>
         </div>
         );
