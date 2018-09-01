@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+    img {
+        width: 105px;
+    }
+}
+
+.tab-list {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 65px;
+    border-bottom: 1px solid #efefef;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    .tab {
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        a {
+            color: #868e96;
+            text-decoration: none;
+            transition: all .3s ease-in-out;
+            &:after {
+                content: "";
+                background: #000;
+                width: 120%;
+                height: 4px;
+                display: block;
+                position: absolute;
+                bottom: 0;
+                left: -10%;
+                opacity: 0;
+                transition: opacity .3s ease-in-out;
+            }
+            &.active:after {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.card-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .card {
+        display: flex;
+        align-items: center;
+        max-width: 100%;
+        width: 500px;
+        margin-top: 20px;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid #efefef;
+        .card-img {
+            width: 40%;
+            img {
+                min-width: 100%;
+                width: 100%;
+                min-height: 140px;
+                vertical-align: middle;
+                display: inline-block;
+            }
+        }
+        .card-content {
+            width: 60%;
+            padding: 10px 20px;
+            h4 {
+                font-weight: 100;
+                margin: 10px 0;
+            }
+        }
+    }
+}

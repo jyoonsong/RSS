@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home, Login } from 'pages';
+import { Home, Login } from 'containers';
 
 class App extends Component {
     render() {
         return (
-            <div className="container">
+            <div>
                 <Switch>
                     <Route path="/login" component={Login}/>
                     <Route path="/" component={Home}/>
