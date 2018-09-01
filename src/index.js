@@ -4,18 +4,20 @@ import Root from './client/Root';
 import registerServiceWorker from './registerServiceWorker';
 
 // redux
-// import { createStore } from 'redux'
-// import reducers from './reducers';
-// import { Provider } from 'react-redux';
+import { createStore } from 'redux'
+import reducers from './reducers';
+import { Provider } from 'react-redux';
 
 // styles
 import 'styles/main.scss';
 
 // store
-// const store = createStore(reducers);
+const store = createStore(reducers);
 
 ReactDOM.render(
-        <Root />,
+    <Provider store={store}>
+        <Root />
+    </Provider>, 
     document.getElementById('root')
 );
 registerServiceWorker();
