@@ -14,7 +14,7 @@ class Restaurant extends Component {
         }
 
         return (
-        <div className="card">
+        <div className="card" id={id}>
             <div className="card-main">
                 <div className="card-main-media">
                     <img src={require('img/' + name + '.jpg')} alt={name}/>
