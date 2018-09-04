@@ -18,6 +18,7 @@ class RestaurantList extends Component {
             }
         });
 
+        // list into card
         const restaurantList = filteredRestaurants.map(
             ({id, name, isChecked, ratings}) => {
                 return <Restaurant

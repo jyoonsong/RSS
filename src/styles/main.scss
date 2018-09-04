@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-$base-font-family: 'Spoqa Han Sans', Helvetica, sans-serif !default;
+$base-font-family: -apple-system, BlinkMacSystemFont, 'Spoqa Han Sans', Helvetica, sans-serif !default;
 $base-font-size:   16px !default;
 $base-font-weight: 400 !default;
 
@@ -81,7 +81,7 @@ $yellow: (
 );
 
 $text-color: $grey-7 !default;
-$bg-color: #fff !default;
+$bg-color: #fcfcfc !default;
 $border-color: $grey-4 !default;
 
 $landscape: 1080px !default;

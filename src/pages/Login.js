@@ -8,6 +8,8 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 const responseFacebook = (response) => {
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
+        let accessToken = response.authResponse.accessToken;
+        console.log(accessToken);
     } 
     else {
         // The person is not logged into this app or we are unable to tell. 
@@ -23,9 +25,9 @@ const Login = () => {
             <img src={require("img/matcha.png")} alt="logo"/>
             <p>네 입 맛 에 <span className="white">맛 챠</span> 줄 게</p>
             <FacebookLogin
-                appId="1088597931155576" // TODO
+                appId="1087520368071444" // TODO
                 autoLoad={true}
-                fields="name, email, picture"
+                fields="name, email"
                 textButton=" 페이스북으로 로그인"
                 icon={<FontAwesomeIcon icon={faFacebook} />}
                 callback={responseFacebook} />
