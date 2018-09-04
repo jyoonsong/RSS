@@ -9,7 +9,7 @@ class Restaurant extends Component {
         const index = ratings.findIndex(r => r.user === 0),
               value = (index < 0)? 0 : ratings[index].star;
 
-        const ratingChanged = (newRating) => {
+        const handleRate = (newRating) => {
             console.log(newRating)
         }
 
@@ -17,7 +17,7 @@ class Restaurant extends Component {
         <div className="card" id={id}>
             <div className="card-main">
                 <div className="card-main-media">
-                    <img src={require('img/' + name + '.jpg')} alt={name}/>
+                    <img src={require('img/restaurants/' + name + '.jpg')} alt={name}/>
                 </div>
                 <div className="card-main-content">
                     <h3>{name}</h3>
@@ -25,7 +25,7 @@ class Restaurant extends Component {
                     <ReactStars count={5}
                                 size={45}
                                 value={value}
-                                onChange={ratingChanged}
+                                onChange={handleRate}
                                 color1={'#e9ecef'}
                                 color2={'#fcc419'} />
                 </div>
