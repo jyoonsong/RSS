@@ -6,6 +6,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const responseFacebook = (response) => {
+    console.log(response);
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
         let accessToken = response.authResponse.accessToken;
@@ -26,7 +27,6 @@ const Login = () => {
             <p className="subtitle">네 입 맛 에 <span className="white">맛 챠</span> 줄 게</p>
             <FacebookLogin
                 appId="1087520368071444" // jaeyoon
-                autoLoad={true}
                 fields="name, email"
                 textButton="페이스북으로 로그인"
                 xfbml={true}

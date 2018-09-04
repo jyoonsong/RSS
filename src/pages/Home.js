@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Menu from 'components/Menu';
 import RestaurantList from 'components/RestaurantList';
 
@@ -24,7 +24,7 @@ class Home extends Component {
         ]
     }
 
-    handleChange= (id, newRating) => {
+    handleChange = (id, newRating) => {
 		const {restaurants} = this.state;
 		
 		const index = restaurants.findIndex(res => res.id === id);
@@ -40,10 +40,13 @@ class Home extends Component {
 	}
 
     render() {
-        const { restaurants } = this.state;
+        const { restaurants, logged } = this.state;
 
         return (
             <div>
+                {
+                    !logged && <Redirect to="/login"/>
+                }
                 <div className="bar">
                     <img src={require("img/matcha-white.png")} alt="logo"/>
                 </div>
