@@ -58,7 +58,8 @@
   "scripts": {
     "start": "cross-env NODE_PATH=src node scripts/start.js",
     "build": "cross-env NODE_PATH=src node scripts/build.js",
-    "test": "cross-env NODE_PATH=src node scripts/test.js --env=jsdom"
+    "test": "cross-env NODE_PATH=src node scripts/test.js --env=jsdom",
+    "deploy": "yarn build && aws s3 sync build s3://rss.backend"
   },
   "jest": {
     "collectCoverageFrom": [
