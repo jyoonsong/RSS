@@ -36,7 +36,7 @@ const Login = () => {
                 icon={<FontAwesomeIcon icon={faFacebook} />}
                 callback={responseFacebook} />
             <GoogleLogin
-                clientId={'658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com'} // TODO
+                clientId={'563311872927-e2igmlvdlkcglr51go0ev763rrqifhvd.apps.googleusercontent.com'}
                 className="button google"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
