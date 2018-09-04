@@ -1,0 +1,30 @@
+.title {
+    width: 256px;
+    max-width: 100%;
+}
+.subtitle {
+    letter-spacing: 27px;
+}
+.button {
+    display: inline-block;
+    border: none;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    cursor: pointer;
+    width: 300px;
+    padding: 1rem .5rem;
+    max-width: 100%;
+    border-radius: 3px;
+    font-size: .9rem;
+    font-weight: 600;
+    &.facebook {
+        background-color: #4c69ba;
+        margin-bottom: 1rem;
+    }
+    &.google {
+        background-color: rgb(209, 72, 54);
+    }
+    svg {
+        margin-right: .5rem;
+    }
+}

@@ -22,22 +22,27 @@ const responseGoogle = (response) => {
 const Login = () => {
     return (
         <div className="container text-center">
-            <img src={require("img/matcha.png")} alt="logo"/>
-            <p>네 입 맛 에 <span className="white">맛 챠</span> 줄 게</p>
+            <img className="title" src={require("img/matcha.png")} alt="logo"/>
+            <p className="subtitle">네 입 맛 에 <span className="white">맛 챠</span> 줄 게</p>
             <FacebookLogin
-                appId="1087520368071444" // TODO
+                appId="1087520368071444" // jaeyoon
                 autoLoad={true}
                 fields="name, email"
-                textButton=" 페이스북으로 로그인"
+                textButton="페이스북으로 로그인"
+                xfbml={true}
+                cookie={true}
+                version="3.1"
+                cssClass="button facebook"
                 icon={<FontAwesomeIcon icon={faFacebook} />}
                 callback={responseFacebook} />
             <GoogleLogin
                 clientId={'658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com'} // TODO
+                className="button google"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
             >
                 <FontAwesomeIcon icon={faGoogle} />
-                <span> 구글로 로그인</span>
+                <span>구글로 로그인</span>
             </GoogleLogin>
         </div>
     );
