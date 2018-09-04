@@ -40,7 +40,8 @@ class Home extends Component {
 	}
 
     render() {
-        const { restaurants, logged } = this.state;
+        const { restaurants } = this.state;
+        const logged = localStorage.getItem('isLogged');
 
         return (
             <div>

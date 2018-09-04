@@ -2,15 +2,16 @@ import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const responseFacebook = (response) => {
     console.log(response);
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
-        let accessToken = response.authResponse.accessToken;
-        console.log(accessToken);
+        localStorage.setItem('isLogged', true);
+        // let accessToken = response.authResponse.accessToken;
+        // console.log(accessToken);
     } 
     else {
         // The person is not logged into this app or we are unable to tell. 
@@ -18,6 +19,13 @@ const responseFacebook = (response) => {
 }
 const responseGoogle = (response) => {
     console.log(response);
+    if (!response.error) {
+        localStorage.setItem('isLogged', true);
+    }
+    else {
+        // The person is not logged into this app or we are unable to tell. 
+    }
+    
 }
 
 const Login = () => {
@@ -33,7 +41,7 @@ const Login = () => {
                 cookie={true}
                 version="3.1"
                 cssClass="button facebook"
-                icon={<FontAwesomeIcon icon={faFacebook} />}
+                icon={<FontAwesomeIcon icon={faFacebookF} />}
                 callback={responseFacebook} />
             <GoogleLogin
                 clientId={'563311872927-e2igmlvdlkcglr51go0ev763rrqifhvd.apps.googleusercontent.com'}
