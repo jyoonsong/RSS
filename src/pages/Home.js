@@ -41,12 +41,12 @@ class Home extends Component {
 
     render() {
         const { restaurants } = this.state;
-        const logged = localStorage.getItem('isLogged');
+        const logged = JSON.parse(localStorage.getItem('isLogged') || false);
 
         return (
             <div>
                 {
-                    !logged && <Redirect to="/login"/>
+                    !logged && <Redirect to="/login" />
                 }
                 <div className="bar">
                     <img src={require("img/matcha-white.png")} alt="logo"/>

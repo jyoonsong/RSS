@@ -1,9 +1,17 @@
+.wrapper {
+    height: 100vh;
+    background: center top no-repeat #fff;
+    background-size: auto 110%;
+}
 .title {
     width: 256px;
     max-width: 100%;
 }
 .subtitle {
-    letter-spacing: 27px;
+    font-size: .9rem;
+    letter-spacing: .5rem;
+    color: $grey-9;
+    margin-bottom: 3rem;
 }
 .button {
     display: inline-block;
@@ -18,7 +26,7 @@
     font-size: .9rem;
     font-weight: 600;
     &.facebook {
-        background-color: #4c69ba;
+        background-color: #39539c; // #4c69ba;
         margin-bottom: 1rem;
     }
     &.google {
