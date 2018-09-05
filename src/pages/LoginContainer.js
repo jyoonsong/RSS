@@ -6,7 +6,9 @@ import { Redirect } from 'react-router-dom';
 import Login from 'components/Login';
 
 const login = (token) => {
-    localStorage.setItem('userId', jwt.decode(token));
+    localStorage.setItem('isLogged', true);
+    localStorage.setItem('userName', jwt.decode(token).name);
+    axios.defaults.headers.common = {'Authorization': "bearer " + token}
 }
 
 const loginAPI = (provider, accessToken, id, name, email) => {
@@ -17,8 +19,8 @@ const loginAPI = (provider, accessToken, id, name, email) => {
         accessToken
     }).then(res => {
         console.log(res);
-        if (res.isUser)
-            login(res.token);
+        if (res.data.isUser)
+            login(res.data.token);
         else
             singupAPI(provider, id, name, email);
     });
@@ -34,8 +36,8 @@ const singupAPI = (provider, id, name, email) => {
         id
     }).then(res => {
         console.log(res);
-        if (res.isUser)
-            login(res.token);
+        if (res.data.isUser)
+            login(res.data.token);
     })
 }
 
