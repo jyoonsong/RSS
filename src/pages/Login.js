@@ -43,7 +43,7 @@ const singupAPI = (provider, id, name, email) => {
 
 const responseFacebook = (response) => {
     console.log(response);
-    if (response.status === 'connected') {
+    if (response.email) {
         // Logged into your app and Facebook.
         loginAPI(response.accessToken, "facebook", response.id, response.name, response.email);
     } 
