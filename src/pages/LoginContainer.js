@@ -48,7 +48,7 @@ const LoginContainer = ({history}) => {
     }
     const responseGoogle = (response) => {
         console.log(response);
-        loginAPI("google", response.accessToken, response.tokenId, response.profileObj.name, response.profileObj.email);
+        loginAPI("google", response.tokenId, response.googleId, response.profileObj.name, response.profileObj.email);
     }
     const responseError = (response) => {
         console.log("ERR");
