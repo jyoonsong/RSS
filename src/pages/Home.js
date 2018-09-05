@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
+
 import Menu from 'components/Menu';
 import RestaurantList from 'components/RestaurantList';
 
@@ -41,7 +43,7 @@ class Home extends Component {
 
     render() {
         const { restaurants } = this.state;
-        const logged = JSON.parse(localStorage.getItem('isLogged') || false);
+        const logged = jwt.decode(localStorage.getItem('isLogged'));
 
         return (
             <div>

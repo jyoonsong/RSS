@@ -24,8 +24,7 @@ const Login = ({responseFacebook, responseGoogle, responseError}) => {
                     cssClass="button facebook"
                     icon={<FontAwesomeIcon icon={faFacebookF} />}
                     callback={responseFacebook}
-                    onFailure={responseError}
-                    redirectUri={window.location.origin} />
+                    onFailure={responseError} />
                 <br/>
                 <GoogleLogin
                     clientId={'563311872927-e2igmlvdlkcglr51go0ev763rrqifhvd.apps.googleusercontent.com'}
