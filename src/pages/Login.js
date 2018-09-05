@@ -62,12 +62,10 @@ const responseGoogle = (response) => {
 }
 
 const Login = () => {
-    const logged = JSON.parse(localStorage.getItem('isLogged') || false);
-
     return (
         <div>
             {
-                logged && <Redirect to="/" />
+                JSON.parse(localStorage.getItem('isLogged') || false) && <Redirect to="/" />
             }
              <div className="wrapper flex flex-column justify-center" 
              style={{backgroundImage: "url('" + require('img/bg-pattern.png') + "')"}}>
