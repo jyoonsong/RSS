@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
-import Restaurant from './Restaurant';
+import Restaurant from 'components/Restaurant';
 
 class RestaurantList extends Component {
+
     render() {
-        const { match, restaurants } = this.props;
+        const { match, restaurants, currentUser } = this.props;
 
         // filter list with path
         const filteredRestaurants = restaurants.filter(
-            ({id, name, ratings}) => {
+            ({Ratings}) => {
             switch (match.path) {
                 case '/visited':
-                    return ratings.findIndex(r => r.user === 0 && r.star !== 0) >= 0;
+                    return Ratings.findIndex(r => r.UserID === currentUser && r.Stars !== 0) >= 0;
                 case '/unvisited':
-                    return ratings.findIndex(r => r.user === 0 && r.star === 0) >= 0;
+                    return Ratings.findIndex(r => r.UserID === currentUser && r.Stars === 0) >= 0;
                 default:
-                    return ratings.findIndex(r => r.user === 0) < 0;
+                    return Ratings.findIndex(r => r.UserID === currentUser) < 0;
             }
         });
 
         // list into card
         const restaurantList = filteredRestaurants.map(
-            ({id, name, isChecked, ratings}) => {
+            ({ID, Name, Ratings}) => {
                 return <Restaurant
-                    id={id}
-                    name={name}
-                    ratings={ratings}
-                    isChecked={isChecked}
-                    key={id}
+                    id={ID}
+                    name={Name}
+                    ratings={Ratings}
+                    key={ID}
                 />
             }
         );

@@ -8,9 +8,14 @@ import Login from 'components/Login';
 const LoginContainer = ({history}) => {
 
     const login = (token) => {
+        // current user info in header
         localStorage.setItem('isLogged', token);
-        localStorage.setItem('userName', jwt.decode(token).name);
+        localStorage.setItem('currentUser', jwt.decode(token).id);
+
+        // for api athentication
         axios.defaults.headers.common = {'Authorization': "bearer " + token};
+
+        // redirect
         history.push("/");
     }
     
@@ -57,9 +62,6 @@ const LoginContainer = ({history}) => {
 
     return (
         <div>
-            {
-                console.log(jwt.decode(localStorage.getItem('isLogged')) != null)
-            }
             {
                 (jwt.decode(localStorage.getItem('isLogged') != null)) && <Redirect to="/" />
             }

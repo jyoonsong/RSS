@@ -6,11 +6,11 @@ class Restaurant extends Component {
     render() {
         const { name, id, ratings } = this.props;
         
-        const index = ratings.findIndex(r => r.user === 0),
-              value = (index < 0)? 0 : ratings[index].star;
+        const index = ratings.findIndex(r => r.UserID === 1),
+              value = (index < 0)? 0 : ratings[index].Stars;
 
-        const handleRate = (newRating) => {
-            console.log(newRating)
+        const handleStarsChange = (newStars) => {
+            console.log(newStars)
         }
 
         return (
@@ -25,7 +25,7 @@ class Restaurant extends Component {
                     <ReactStars count={5}
                                 size={45}
                                 value={value}
-                                onChange={handleRate}
+                                onChange={handleStarsChange}
                                 color1={'#e9ecef'}
                                 color2={'#fcc419'} />
                 </div>

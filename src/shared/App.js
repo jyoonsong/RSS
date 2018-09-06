@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Home, LoginContainer } from 'pages';
+import { HomePage, LoginPage } from 'pages';
 
 class App extends Component {
     componentDidMount() {
@@ -12,8 +12,8 @@ class App extends Component {
         return (
             <div>
                 <Switch>
-                    <Route path="/login" component={LoginContainer}/>
-                    <Route path="/" component={Home}/>
+                    <Route path="/login" component={LoginPage}/>
+                    <Route path="/" component={HomePage}/>
                 </Switch>
             </div>
         );
