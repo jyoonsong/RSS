@@ -4,13 +4,17 @@ import ReactStars from 'react-stars'
 class Restaurant extends Component {
 
     render() {
-        const { name, id, ratings, updateStars } = this.props;
+        const { name, id, ratings, currentUser, updateStars } = this.props;
         
-        const index = ratings.findIndex(r => r.UserID === 1),
+        const index = ratings.findIndex(r => r.UserID === currentUser),
               value = (index < 0)? 0 : ratings[index].Stars;
 
         const onStarChange = (newStars) => {
-            updateStars(newStars, id);
+            updateStars(id, newStars);
+        }
+        
+        const onUnvisited = () => {
+            updateStars(id, 0);
         }
 
         return (
@@ -31,7 +35,7 @@ class Restaurant extends Component {
                 </div>
             </div>
             <div className="card-footer">
-                <div className="card-footer-button">안 가봤어요</div>
+                <div className="card-footer-button" onClick={onUnvisited}>안 가봤어요</div>
             </div>
         </div>
         );

@@ -7,10 +7,6 @@ import Login from 'components/Login';
 
 const LoginPage = ({history}) => {
 
-    const serverAPI = axios.create({
-        baseURL: 'https://api.xn--0z2bs25a.com/'
-    });
-
     const login = (token) => {
         // current user info in header
         localStorage.setItem('isLogged', token);
@@ -21,7 +17,9 @@ const LoginPage = ({history}) => {
     }
     
     const loginAPI = (provider, accessToken, id, name, email) => {
-        serverAPI.post('login', {
+        const serverAPI = localStorage.getItem('serverAPI');
+
+        axios.post(serverAPI + 'login', {
             provider,
             accessToken
         }).then(res => {
@@ -33,7 +31,9 @@ const LoginPage = ({history}) => {
     }
     
     const singupAPI = (provider, id, name, email) => {
-        serverAPI.post('users', {
+        const serverAPI = localStorage.getItem('serverAPI');
+    
+        axios.post(serverAPI + 'users', {
             name,
             email,
             provider,

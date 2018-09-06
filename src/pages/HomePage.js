@@ -29,88 +29,21 @@ const initialRestaurants = [
                 "RestaurantID": 1
             }
         ]
-    },
-    {
-        "ID": 2,
-        "CreatedAt": "2018-09-05T13:31:39Z",
-        "UpdatedAt": "2018-09-05T13:31:39Z",
-        "DeletedAt": null,
-        "Name": "꼼뽀스텔라",
-        "Description": "",
-        "Address": "",
-        "Kind": "",
-        "Thumbnail": "",
-        "Ratings": [
-            {
-                "ID": 2,
-                "CreatedAt": "2018-09-05T13:31:39Z",
-                "UpdatedAt": "2018-09-05T13:31:39Z",
-                "DeletedAt": null,
-                "Stars": 3.5,
-                "UserID": 1,
-                "RestaurantID": 2
-            }
-        ]
-    },
-    {
-        "ID": 3,
-        "CreatedAt": "2018-09-05T13:31:39Z",
-        "UpdatedAt": "2018-09-05T13:31:39Z",
-        "DeletedAt": null,
-        "Name": "쟈니로켓",
-        "Description": "",
-        "Address": "",
-        "Kind": "",
-        "Thumbnail": "",
-        "Ratings": [
-            {
-                "ID": 4,
-                "CreatedAt": "2018-09-05T13:31:39Z",
-                "UpdatedAt": "2018-09-05T13:31:39Z",
-                "DeletedAt": null,
-                "Stars": 0,
-                "UserID": 1,
-                "RestaurantID": 3
-            }
-        ]
-    },
-    {
-        "ID": 4,
-        "CreatedAt": "2018-09-05T13:31:39Z",
-        "UpdatedAt": "2018-09-05T13:31:39Z",
-        "DeletedAt": null,
-        "Name": "시추안하우스",
-        "Description": "",
-        "Address": "",
-        "Kind": "",
-        "Thumbnail": "",
-        "Ratings": []
-    },
-    {
-        "ID": 5,
-        "CreatedAt": "2018-09-05T13:31:39Z",
-        "UpdatedAt": "2018-09-05T13:31:39Z",
-        "DeletedAt": null,
-        "Name": "더플레이트",
-        "Description": "",
-        "Address": "",
-        "Kind": "",
-        "Thumbnail": "",
-        "Ratings": []
     }
 ];
 
 const serverAPI = axios.create({
     baseURL: 'https://api.xn--0z2bs25a.com/api/',
-    headers: { 
-        'Authorization': 'Bearer ' +  localStorage.getItem('isLogged')
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('isLogged')
     }
 });
 
 class HomePage extends Component {
 
     componentWillMount() {
-        this.restaurantAPI();
+        if (jwt.decode(localStorage.getItem('isLogged')))
+            this.restaurantAPI();
     }
 
     state = {
@@ -119,16 +52,15 @@ class HomePage extends Component {
     }
 
     restaurantAPI = () => {
-
         serverAPI.get('restaurants')
         .then(res => {
             console.log(res);
             this.setState({
-                restaurants: res
+                restaurants: res.data
             });
         })
         .catch(error => {
-            console.log(error);
+            this.handleError(error);
         })
     }
 
@@ -140,8 +72,27 @@ class HomePage extends Component {
             console.log(res);
         })
         .catch(error => {
-            console.log(error);
+            this.handleError(error);
         })
+    }
+
+    handleError = (error) => {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+        } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+        }
+        console.log(error.config);
     }
 
     render() {
