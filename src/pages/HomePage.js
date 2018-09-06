@@ -100,6 +100,13 @@ const initialRestaurants = [
     }
 ];
 
+const serverAPI = axios.create({
+    baseURL: 'https://api.xn--0z2bs25a.com/api/',
+    headers: { 
+        'Authorization': 'Bearer ' +  localStorage.getItem('isLogged')
+    }
+});
+
 class HomePage extends Component {
 
     componentWillMount() {
@@ -108,13 +115,12 @@ class HomePage extends Component {
 
     state = {
         restaurants: initialRestaurants,
-        user: parseInt(localStorage.getItem('currentUser'))
+        user: parseInt(localStorage.getItem('currentUser'), 10)
     }
 
     restaurantAPI = () => {
-        const serverAPI = localStorage.getItem('serverAPI');
-    
-        axios.get(serverAPI + 'api/restaurants')
+
+        serverAPI.get('restaurants')
         .then(res => {
             console.log(res);
             this.setState({
@@ -126,23 +132,21 @@ class HomePage extends Component {
         })
     }
 
-    handleChange = (id, newRating) => {
-		const {restaurants} = this.state;
-		
-		const index = restaurants.findIndex(res => res.id === id);
-        const selected = restaurants[index];
-        const ratingIndex = selected.ratings.findIndex(r => r.user === newRating.user);
-        
-		const nextRestaurants = [...restaurants];
-        nextRestaurants[index].ratings[ratingIndex] = newRating;
-
-		this.setState({
-			restaurants: nextRestaurants
-		});
-	}
+    updateStars = (id, newStars) => {
+        serverAPI.post('ratings', {
+            stars: newStars,
+            restaurantId: id
+        }).then(res => {
+            console.log(res);
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
 
     render() {
         const { restaurants, user } = this.state;
+        const { updateStars } = this;
         const logged = jwt.decode(localStorage.getItem('isLogged'));
 
         return (
@@ -153,20 +157,11 @@ class HomePage extends Component {
                 <Bar/>
                 <Menu/>
                 <Switch>
-                    <Route exact path="/" render={props => 
+                    <Route exact path="(/|/visited|/unvisited)/" render={props => 
                         <RestaurantList {...props}
                                         restaurants={restaurants}
-                                        currentUser={user}/>
-                    }/>
-                    <Route exact path="/visited" render={props => 
-                        <RestaurantList {...props}
-                                        restaurants={restaurants}
-                                        currentUser={user}/>
-                    }/>
-                    <Route exact path="/unvisited" render={props => 
-                        <RestaurantList {...props}
-                                        restaurants={restaurants}
-                                        currentUser={user}/>
+                                        currentUser={user}
+                                        updateStars={updateStars}/>
                     }/>
                 </Switch>
             </div>

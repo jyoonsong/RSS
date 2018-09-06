@@ -5,24 +5,23 @@ import { Redirect } from 'react-router-dom';
 
 import Login from 'components/Login';
 
-const LoginContainer = ({history}) => {
+const LoginPage = ({history}) => {
+
+    const serverAPI = axios.create({
+        baseURL: 'https://api.xn--0z2bs25a.com/'
+    });
 
     const login = (token) => {
         // current user info in header
         localStorage.setItem('isLogged', token);
         localStorage.setItem('currentUser', jwt.decode(token).id);
 
-        // for api athentication
-        axios.defaults.headers.common = {'Authorization': "bearer " + token};
-
         // redirect
         history.push("/");
     }
     
     const loginAPI = (provider, accessToken, id, name, email) => {
-        const serverAPI = localStorage.getItem('serverAPI');
-    
-        axios.post(serverAPI + 'login', {
+        serverAPI.post('login', {
             provider,
             accessToken
         }).then(res => {
@@ -34,9 +33,7 @@ const LoginContainer = ({history}) => {
     }
     
     const singupAPI = (provider, id, name, email) => {
-        const serverAPI = localStorage.getItem('serverAPI');
-    
-        axios.post(serverAPI + 'users', {
+        serverAPI.post('users', {
             name,
             email,
             provider,
@@ -72,4 +69,4 @@ const LoginContainer = ({history}) => {
     );
 };
 
-export default LoginContainer;
+export default LoginPage;

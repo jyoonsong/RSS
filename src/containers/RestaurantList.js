@@ -4,12 +4,11 @@ import Restaurant from 'components/Restaurant';
 class RestaurantList extends Component {
 
     render() {
-        const { match, restaurants, currentUser } = this.props;
+        const { match, restaurants, currentUser, updateStars } = this.props;
 
         // filter list with path
-        const filteredRestaurants = restaurants.filter(
-            ({Ratings}) => {
-            switch (match.path) {
+        const filteredRestaurants = restaurants.filter(({Ratings}) => {
+            switch (match.url) {
                 case '/visited':
                     return Ratings.findIndex(r => r.UserID === currentUser && r.Stars !== 0) >= 0;
                 case '/unvisited':
@@ -27,6 +26,7 @@ class RestaurantList extends Component {
                     name={Name}
                     ratings={Ratings}
                     key={ID}
+                    updateStars={updateStars}
                 />
             }
         );

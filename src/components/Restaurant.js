@@ -4,17 +4,17 @@ import ReactStars from 'react-stars'
 class Restaurant extends Component {
 
     render() {
-        const { name, id, ratings } = this.props;
+        const { name, id, ratings, updateStars } = this.props;
         
         const index = ratings.findIndex(r => r.UserID === 1),
               value = (index < 0)? 0 : ratings[index].Stars;
 
-        const handleStarsChange = (newStars) => {
-            console.log(newStars)
+        const onStarChange = (newStars) => {
+            updateStars(newStars, id);
         }
 
         return (
-        <div className="card" id={id}>
+        <div className="card">
             <div className="card-main">
                 <div className="card-main-media">
                     <img src={require('img/restaurants/' + name + '.jpg')} alt={name}/>
@@ -25,7 +25,7 @@ class Restaurant extends Component {
                     <ReactStars count={5}
                                 size={45}
                                 value={value}
-                                onChange={handleStarsChange}
+                                onChange={onStarChange}
                                 color1={'#e9ecef'}
                                 color2={'#fcc419'} />
                 </div>
