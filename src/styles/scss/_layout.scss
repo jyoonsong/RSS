@@ -67,6 +67,14 @@ body {
     }
 }
 
+.list-group {
+    .list-group-item {
+        .list-group-item-heading {
+            margin: 0;
+        }
+    }
+}
+
 .card-list {
     display: flex;
     flex-direction: column;

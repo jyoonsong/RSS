@@ -22,21 +22,19 @@ class RestaurantList extends Component {
         // list into card
         const restaurantList = filteredRestaurants.map(
             ({ID, Name, Ratings}) => {
-                return  <SwipeToDelete key={ID}>
-                            <Restaurant
-                                id={ID}
-                                name={Name}
-                                ratings={Ratings}
-                                key={ID}
-                                currentUser={currentUser}
-                                updateStars={updateStars}
-                            />
-                        </SwipeToDelete>
+                return  <Restaurant
+                            id={ID}
+                            name={Name}
+                            ratings={Ratings}
+                            key={ID}
+                            currentUser={currentUser}
+                            updateStars={updateStars}
+                        />
             }
         );
 
         return (
-            <div className="container card-list">
+            <div className="container list-group">
                 {restaurantList}
             </div>
         );

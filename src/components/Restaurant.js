@@ -18,6 +18,7 @@ class Restaurant extends Component {
         }
 
         return (
+
         <div className="card">
             <div className="card-main">
                 <div className="card-main-media">
