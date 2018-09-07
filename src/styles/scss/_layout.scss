@@ -69,8 +69,17 @@ body {
 
 .list-group {
     .list-group-item {
+        display: block;
+        padding: 10px 15px;
         .list-group-item-heading {
-            margin: 0;
+            display: inline-block;
+            margin: .75rem 0 0;
+            font-weight: 200;
+            small {
+                margin: 0 .5rem;
+                color: $grey-5;
+                vertical-align: 6%;
+            }
         }
     }
 }

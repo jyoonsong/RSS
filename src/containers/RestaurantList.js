@@ -33,7 +33,7 @@ class RestaurantList extends Component {
         );
 
         return (
-            <div className="container card-list">
+            <div className="container list-group">
                 {restaurantList}
             </div>
         );
