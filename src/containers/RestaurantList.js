@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Restaurant from 'components/Restaurant';
-import SwipeToDelete from 'react-swipe-to-delete-component';
 
 class RestaurantList extends Component {
 
@@ -34,7 +33,7 @@ class RestaurantList extends Component {
         );
 
         return (
-            <div className="container list-group">
+            <div className="container card-list">
                 {restaurantList}
             </div>
         );

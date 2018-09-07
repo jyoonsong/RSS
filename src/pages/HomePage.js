@@ -42,13 +42,19 @@ const serverAPI = axios.create({
 class HomePage extends Component {
 
     componentWillMount() {
-        if (jwt.decode(localStorage.getItem('isLogged')))
+        if (jwt.decode(localStorage.getItem('isLogged'))) {
+            this.setState({
+                logged: true
+            });
             this.restaurantAPI();
+            this.tagAPI();
+        }
     }
 
     state = {
         restaurants: initialRestaurants,
-        user: parseInt(localStorage.getItem('currentUser'), 10)
+        user: parseInt(localStorage.getItem('currentUser'), 10),
+        logged: false
     }
 
     restaurantAPI = () => {
@@ -64,6 +70,13 @@ class HomePage extends Component {
         })
     }
 
+    tagAPI = () => {
+        serverAPI.get('tags')
+        .then(res => {
+            console.log(res);
+        })
+    }
+
     updateStars = (id, newStars) => {
         serverAPI.post('ratings', {
             stars: newStars,
@@ -75,6 +88,15 @@ class HomePage extends Component {
             this.handleError(error);
         })
     }
+
+    // updateTags = () => {
+    //     serverAPI.post('tags', {
+    //         tags: tags,
+    //         restaurantId: id
+    //     }).then(res => {
+
+    //     })
+    // }
 
     handleError = (error) => {
         if (error.response) {
@@ -96,9 +118,8 @@ class HomePage extends Component {
     }
 
     render() {
-        const { restaurants, user } = this.state;
+        const { restaurants, user, logged } = this.state;
         const { updateStars } = this;
-        const logged = jwt.decode(localStorage.getItem('isLogged'));
 
         return (
             <div>

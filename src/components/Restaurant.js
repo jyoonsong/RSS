@@ -17,12 +17,16 @@ class Restaurant extends Component {
             updateStars(id, 0);
         }
 
+        // const onTagChange = (newTags) => {
+        //     updateTags(id, newTags);
+        // }
+
         return (
 
         <div className="card">
             <div className="card-main">
                 <div className="card-main-media">
-                    <img src={require('img/restaurants/' + name + '.jpg')} alt={name}/>
+                    <img src={require('img/restaurants/C27.jpg')} alt={name}/>
                 </div>
                 <div className="card-main-content">
                     <h3>{name}</h3>
