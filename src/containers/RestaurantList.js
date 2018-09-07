@@ -3,7 +3,15 @@ import Restaurant from 'components/Restaurant';
 import Tag from 'components/Tag';
 import dictionary from 'lib/dictionary.json';
 
+function importAll(r) {
+    let images = {};
+    r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+    return images;
+}
+
 class RestaurantList extends Component {
+
+    images = importAll(require.context('img/restaurants', false, /\.(png|jpe?g|svg)$/));
 
     count = 0;
 
@@ -19,7 +27,7 @@ class RestaurantList extends Component {
 
     render() {
         const { match, restaurants, currentUser, updateTags, updateStars } = this.props;
-        const { tagList } = this;
+        const { tagList, images } = this;
 
         // filter list with path
         const filteredRestaurants = restaurants.filter(({Ratings}) => {
@@ -42,6 +50,7 @@ class RestaurantList extends Component {
                             ratings={Ratings}
                             key={ID}
                             currentUser={currentUser}
+                            image={images[Name + ".jpg"]}
                             tagList={tagList}
                             updateTags={updateTags}
                             updateStars={updateStars}

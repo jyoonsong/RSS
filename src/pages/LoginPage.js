@@ -44,7 +44,6 @@ const LoginPage = ({history}) => {
             id
         })
         .then(res => {
-            console.log(res);
             if (res.data.isUser)
                 login(res.data.token);
         })
@@ -64,10 +63,10 @@ const LoginPage = ({history}) => {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
         // http.ClientRequest in node.js
-        console.log(error.request);
+            console.log(error.request);
         } else {
         // Something happened in setting up the request that triggered an Error
-        console.log('Error', error.message);
+            console.log('Error', error.message);
         }
         console.log(error.config);
     }
@@ -76,7 +75,6 @@ const LoginPage = ({history}) => {
         loginAPI("facebook", response.accessToken, response.id, response.name, response.email);
     }
     const responseGoogle = (response) => {
-        console.log(response);
         loginAPI("google", response.tokenId, response.googleId, response.profileObj.name, response.profileObj.email);
     }
     const responseError = (response) => {

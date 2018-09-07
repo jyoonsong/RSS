@@ -44,14 +44,18 @@ const serverAPI = axios.create({
 class HomePage extends Component {
 
     componentWillMount() {
+        console.log("mount");
+
         if (jwt.decode(localStorage.getItem('isLogged'))) {
+            serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
             this.setState({
                 logged: true,
             });
-            serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
             this.restaurantAPI();
             this.tagAPI();
         }
+
+        console.log(serverAPI.defaults.headers);
     }
 
     state = {
@@ -62,9 +66,12 @@ class HomePage extends Component {
     }
 
     restaurantAPI = () => {
-        serverAPI.get('restaurants')
+        serverAPI.get('restaurants', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('isLogged')
+            }
+        })
         .then(res => {
-            console.log(res);
             this.setState({
                 restaurants: res.data
             });
@@ -75,9 +82,12 @@ class HomePage extends Component {
     }
 
     tagAPI = () => {
-        serverAPI.get('tags')
+        serverAPI.get('tags', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('isLogged')
+            }
+        })
         .then(res => {
-            console.log(res);
             this.setState({
                 tags: res.data
             })
@@ -87,9 +97,11 @@ class HomePage extends Component {
     updateStars = (id, newStars) => {
         serverAPI.post('ratings', {
             stars: newStars,
-            restaurantId: id
+            restaurantId: id,
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('isLogged')
+            }
         }).then(res => {
-            console.log(res);
             if (res.data.Stars === 0) {
                 // Unvisited
                 this.restaurantAPI();
@@ -108,10 +120,12 @@ class HomePage extends Component {
 
     updateTags = (ratingId, tags) => {
         serverAPI.post('ratings/' + ratingId + '/tags', {
-            tags: tags
+            tags: tags,
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('isLogged')
+            }
         })
         .then(res => {
-            console.log(res);
             this.restaurantAPI();
         })
         .catch(error => {

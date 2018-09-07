@@ -38,11 +38,10 @@ class Restaurant extends Component {
             tags.classList.add("active");
         else
             tags.classList.remove("active");
-        console.log(tags)
     }
 
     render() {
-        const { name, id, ratings, currentUser, tagList } = this.props;
+        const { name, id, ratings, currentUser, image, tagList } = this.props;
         const { onStarChange, onTagChange, onUnvisited, onToggle } = this;
         
         const index = ratings.findIndex(r => r.UserID === currentUser),
@@ -54,7 +53,7 @@ class Restaurant extends Component {
                 <div className="list-item">
                     <div className="list-item-main">
                         <div className="list-item-media"
-                             style={{backgroundImage: "url('" + require('img/restaurants/' + name + '.jpg') + "')"}}>
+                             style={{backgroundImage: "url('" + image + "')"}}>
                         </div>
                         <div className="list-item-content">
                             <h4 className="list-item-heading">{name}
@@ -64,7 +63,7 @@ class Restaurant extends Component {
                                 <FontAwesomeIcon icon={faChevronCircleDown} />
                             </a>
                             <ReactStars count={5}
-                                    size={45}
+                                    size={43}
                                     value={value}
                                     onChange={onStarChange}
                                     color1={'#e9ecef'}
