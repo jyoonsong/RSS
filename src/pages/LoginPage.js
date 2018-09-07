@@ -22,11 +22,15 @@ const LoginPage = ({history}) => {
         axios.post(serverAPI + 'login', {
             provider,
             accessToken
-        }).then(res => {
+        })
+        .then(res => {
             if (res.data.isUser)
                 login(res.data.token);
             else
                 singupAPI(provider, id, name, email);
+        })
+        .catch(error => {
+            this.handleError(error);
         });
     }
     
@@ -38,11 +42,34 @@ const LoginPage = ({history}) => {
             email,
             provider,
             id
-        }).then(res => {
+        })
+        .then(res => {
             console.log(res);
             if (res.data.isUser)
                 login(res.data.token);
         })
+        .catch(error => {
+            handleError(error);
+        });
+    }
+
+    const handleError = (error) => {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+        } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+        }
+        console.log(error.config);
     }
     
     const responseFacebook = (response) => {

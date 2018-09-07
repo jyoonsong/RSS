@@ -9,9 +9,7 @@
 .swipe-to-delete {
 	position: relative !important;
 	padding: 0 !important;
-	overflow: hidden !important;
 	margin: 1rem 0;
-	box-shadow: 0 5px 20px 1px rgba(137, 137, 137, 0.02), 0 3px 5px 0 rgba(137, 137, 137, 0.03);
 	border-radius: 2px; }
 .swipe-to-delete .js-delete {
 	position: absolute !important;
@@ -26,8 +24,7 @@
 	z-index: 2 !important;
 	-webkit-user-select: none !important;
 	-moz-user-select: none !important;
-	-ms-user-select: none !important;
-	background-color: #fff }
+	-ms-user-select: none !important; }
 .swipe-to-delete .js-content :first-child {
 	position: relative !important; }
 .swipe-to-delete .js-transition-delete-right, .swipe-to-delete .js-transition-delete-left, .swipe-to-delete .js-transition-cancel {

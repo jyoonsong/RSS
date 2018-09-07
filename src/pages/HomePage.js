@@ -32,10 +32,12 @@ const initialRestaurants = [
     }
 ];
 
+const initialTags = [];
+
 const serverAPI = axios.create({
     baseURL: 'https://api.xn--0z2bs25a.com/api/',
     headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('isLogged')
+        Authorization: 'Bearer ' + localStorage.getItem('isLogged')
     }
 });
 
@@ -44,8 +46,9 @@ class HomePage extends Component {
     componentWillMount() {
         if (jwt.decode(localStorage.getItem('isLogged'))) {
             this.setState({
-                logged: true
+                logged: true,
             });
+            serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
             this.restaurantAPI();
             this.tagAPI();
         }
@@ -53,6 +56,7 @@ class HomePage extends Component {
 
     state = {
         restaurants: initialRestaurants,
+        tags: initialTags,
         user: parseInt(localStorage.getItem('currentUser'), 10),
         logged: false
     }
@@ -74,6 +78,9 @@ class HomePage extends Component {
         serverAPI.get('tags')
         .then(res => {
             console.log(res);
+            this.setState({
+                tags: res.data
+            })
         })
     }
 
@@ -83,20 +90,33 @@ class HomePage extends Component {
             restaurantId: id
         }).then(res => {
             console.log(res);
+            if (res.data.Stars === 0) {
+                // Unvisited
+                this.restaurantAPI();
+            }
+            else {
+                // Visited
+                const tags = document.getElementById("tags-" + id)
+                tags.classList.add("active");
+                tags.querySelector("tbody").classList.add("rating" + res.data.ID);
+            }
         })
         .catch(error => {
             this.handleError(error);
         })
     }
 
-    // updateTags = () => {
-    //     serverAPI.post('tags', {
-    //         tags: tags,
-    //         restaurantId: id
-    //     }).then(res => {
-
-    //     })
-    // }
+    updateTags = (ratingId, tags) => {
+        serverAPI.post('ratings/' + ratingId + '/tags', {
+            tags: tags
+        })
+        .then(res => {
+            console.log(res);
+        })
+        .catch(error => {
+            this.handleError(error);
+        })
+    }
 
     handleError = (error) => {
         if (error.response) {
@@ -119,7 +139,7 @@ class HomePage extends Component {
 
     render() {
         const { restaurants, user, logged } = this.state;
-        const { updateStars } = this;
+        const { updateStars, updateTags } = this;
 
         return (
             <div>
@@ -133,7 +153,8 @@ class HomePage extends Component {
                         <RestaurantList {...props}
                                         restaurants={restaurants}
                                         currentUser={user}
-                                        updateStars={updateStars}/>
+                                        updateStars={updateStars}
+                                        updateTags={updateTags}/>
                     }/>
                 </Switch>
             </div>
