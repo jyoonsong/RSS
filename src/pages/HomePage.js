@@ -112,6 +112,7 @@ class HomePage extends Component {
         })
         .then(res => {
             console.log(res);
+            this.restaurantAPI();
         })
         .catch(error => {
             this.handleError(error);

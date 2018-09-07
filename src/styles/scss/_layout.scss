@@ -83,6 +83,11 @@ body {
                 background-size: cover;
             }
             .list-item-content {
+                .toggle {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                }
                 width: 67%;
                 padding: 10px 15px;
                 .list-item-heading {

@@ -3,8 +3,7 @@ import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const Login = ({responseFacebook, responseGoogle, responseError}) => {
     return (
