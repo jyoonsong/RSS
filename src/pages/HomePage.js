@@ -43,21 +43,6 @@ const serverAPI = axios.create({
 
 class HomePage extends Component {
 
-    componentWillMount() {
-        console.log("mount");
-
-        if (jwt.decode(localStorage.getItem('isLogged'))) {
-            serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
-            this.setState({
-                logged: true,
-            });
-            this.restaurantAPI();
-            this.tagAPI();
-        }
-
-        console.log(serverAPI.defaults.headers);
-    }
-
     state = {
         restaurants: initialRestaurants,
         tags: initialTags,
@@ -103,8 +88,15 @@ class HomePage extends Component {
             }
         }).then(res => {
             if (res.data.Stars === 0) {
-                // Unvisited
-                this.restaurantAPI();
+                const { restaurants } = this.state;
+
+                const nextRestaurants = [...restaurants];
+                nextRestaurants[id - 1].Ratings.push(res.data);
+
+                this.setState({
+                  restaurants: nextRestaurants
+                });
+                    
             }
             else {
                 // Visited
@@ -150,11 +142,24 @@ class HomePage extends Component {
         console.log('Error', error.message);
         }
         console.log(error.config);
+        alert(error.message);
+    }
+
+    componentWillMount() {
+        if (jwt.decode(localStorage.getItem('isLogged'))) {
+            serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
+            this.setState({
+                logged: true,
+            });
+            this.restaurantAPI();
+            this.tagAPI();
+        }
     }
 
     render() {
         const { restaurants, user, logged } = this.state;
         const { updateStars, updateTags } = this;
+        serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
 
         return (
             <div>

@@ -3,7 +3,7 @@ import ReactStars from 'react-stars';
 import SwipeToDelete from 'react-swipe-to-delete-component';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronCircleDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 class Restaurant extends Component {
 
@@ -48,8 +48,7 @@ class Restaurant extends Component {
               value = (index < 0)? 0 : ratings[index].Stars;
 
         return (
-            <SwipeToDelete  key={id}
-                            onDelete={onUnvisited}>
+            <div className="swipe-to-delete">
                 <div className="list-item">
                     <div className="list-item-main">
                         <div className="list-item-media"
@@ -59,9 +58,14 @@ class Restaurant extends Component {
                             <h4 className="list-item-heading">{name}
                                 <small>강남역</small>
                             </h4>
-                            <a className="toggle" onClick={onToggle}>
-                                <FontAwesomeIcon icon={faChevronCircleDown} />
-                            </a>
+                            <div className="toggle">
+                                <a onClick={onToggle}>
+                                    <FontAwesomeIcon icon={faChevronCircleDown} />
+                                </a>
+                                <a onClick={onUnvisited}>
+                                    <FontAwesomeIcon icon={faTrashAlt} />
+                                </a>
+                            </div>
                             <ReactStars count={5}
                                     size={43}
                                     value={value}
@@ -84,7 +88,7 @@ class Restaurant extends Component {
                         </table>
                     </div>
                 </div>
-            </SwipeToDelete>
+            </div>
         );
     }
     }
