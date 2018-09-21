@@ -21,6 +21,7 @@ const Login = ({responseFacebook, responseGoogle, responseError}) => {
                     cookie={true}
                     version="3.1"
                     cssClass="button facebook"
+                    redirectUri={window.location.origin}
                     icon={<FontAwesomeIcon icon={faFacebookF} />}
                     callback={responseFacebook}
                     onFailure={responseError} />

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 import Bar from 'components/Bar';
 import Menu from 'components/Menu';
 import RestaurantList from 'containers/RestaurantList';
+import RecommendedList from 'containers/RecommendedList';
 
 const initialRestaurants = [
     {
@@ -19,29 +19,66 @@ const initialRestaurants = [
         "Kind": "",
         "Thumbnail": "",
         "Ratings": [
-            {
-                "ID": 1,
-                "CreatedAt": "2018-09-05T13:31:39Z",
-                "UpdatedAt": "2018-09-05T13:31:39Z",
-                "DeletedAt": null,
-                "Stars": 4,
-                "UserID": 2,
-                "RestaurantID": 1
-            }
         ]
+    },
+    {
+        "ID": 2,
+        "CreatedAt": "2018-09-05T13:31:39Z",
+        "UpdatedAt": "2018-09-05T13:31:39Z",
+        "DeletedAt": null,
+        "Name": "꼼뽀스텔라",
+        "Description": "",
+        "Address": "",
+        "Kind": "",
+        "Thumbnail": "",
+        "Ratings": [
+        ]
+    },
+    {
+        "ID": 3,
+        "CreatedAt": "2018-09-05T13:31:39Z",
+        "UpdatedAt": "2018-09-05T13:31:39Z",
+        "DeletedAt": null,
+        "Name": "C27",
+        "Description": "",
+        "Address": "",
+        "Kind": "",
+        "Thumbnail": "",
+        "Ratings": [
+        ]
+    },
+    {
+        "ID": 4,
+        "CreatedAt": "2018-09-05T13:31:39Z",
+        "UpdatedAt": "2018-09-05T13:31:39Z",
+        "DeletedAt": null,
+        "Name": "이춘복스시",
+        "Description": "",
+        "Address": "",
+        "Kind": "",
+        "Thumbnail": "",
+        "Ratings": []
+    },
+    {
+        "ID": 5,
+        "CreatedAt": "2018-09-05T13:31:39Z",
+        "UpdatedAt": "2018-09-05T13:31:39Z",
+        "DeletedAt": null,
+        "Name": "더플레이트",
+        "Description": "",
+        "Address": "",
+        "Kind": "",
+        "Thumbnail": "",
+        "Ratings": []
     }
+
 ];
 
 const initialTags = [];
 
-const serverAPI = axios.create({
-    baseURL: 'https://api.xn--0z2bs25a.com/api/',
-    headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('isLogged')
-    }
-});
-
 class HomePage extends Component {
+
+    serverAPI = this.props.api;
 
     state = {
         restaurants: initialRestaurants,
@@ -51,7 +88,7 @@ class HomePage extends Component {
     }
 
     restaurantAPI = () => {
-        serverAPI.get('restaurants', {
+        this.serverAPI.get('restaurants', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('isLogged')
             }
@@ -67,7 +104,7 @@ class HomePage extends Component {
     }
 
     tagAPI = () => {
-        serverAPI.get('tags', {
+        this.serverAPI.get('tags', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('isLogged')
             }
@@ -80,7 +117,7 @@ class HomePage extends Component {
     }
 
     updateStars = (id, newStars) => {
-        serverAPI.post('ratings', {
+        this.serverAPI.post('ratings', {
             stars: newStars,
             restaurantId: id,
             headers: {
@@ -96,7 +133,6 @@ class HomePage extends Component {
                 this.setState({
                   restaurants: nextRestaurants
                 });
-                    
             }
             else {
                 // Visited
@@ -111,7 +147,7 @@ class HomePage extends Component {
     }
 
     updateTags = (ratingId, tags) => {
-        serverAPI.post('ratings/' + ratingId + '/tags', {
+        this.serverAPI.post('ratings/' + ratingId + '/tags', {
             tags: tags,
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('isLogged')
@@ -147,7 +183,7 @@ class HomePage extends Component {
 
     componentWillMount() {
         if (jwt.decode(localStorage.getItem('isLogged'))) {
-            serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
+            this.serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
             this.setState({
                 logged: true,
             });
@@ -159,7 +195,6 @@ class HomePage extends Component {
     render() {
         const { restaurants, user, logged } = this.state;
         const { updateStars, updateTags } = this;
-        serverAPI.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
 
         return (
             <div>
@@ -175,6 +210,11 @@ class HomePage extends Component {
                                         currentUser={user}
                                         updateStars={updateStars}
                                         updateTags={updateTags}/>
+                    }/>
+                    <Route exact path="/recommend" render={props => 
+                        <RecommendedList {...props}
+                                        restaurants={restaurants}
+                                        currentUser={user}/>
                     }/>
                 </Switch>
             </div>

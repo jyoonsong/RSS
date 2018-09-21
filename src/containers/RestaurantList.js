@@ -41,6 +41,10 @@ class RestaurantList extends Component {
             }
         });
 
+        const tagListNew = tags.filter(({tagName}) =>
+            tagName.concat("the" + tag.ID)
+        );
+
         // list into card
         const restaurantList = filteredRestaurants.map(
             ({ID, Name, Ratings}) => {
@@ -50,7 +54,7 @@ class RestaurantList extends Component {
                             ratings={Ratings}
                             key={ID}
                             currentUser={currentUser}
-                            image={images[Name + ".jpg"]}
+                            image={images["res" + ID + ".jpg"]} // TODO: change image to column not name-based
                             tagList={tagList}
                             updateTags={updateTags}
                             updateStars={updateStars}

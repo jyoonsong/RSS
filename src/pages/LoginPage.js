@@ -5,12 +5,13 @@ import { Redirect } from 'react-router-dom';
 
 import Login from 'components/Login';
 
-const LoginPage = ({history}) => {
+const LoginPage = ({history, api}) => {
 
     const login = (token) => {
         // current user info in header
         localStorage.setItem('isLogged', token);
         localStorage.setItem('currentUser', jwt.decode(token).id);
+        api.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('isLogged');
 
         // redirect
         history.push("/");
@@ -72,6 +73,7 @@ const LoginPage = ({history}) => {
     }
     
     const responseFacebook = (response) => {
+        console.log(response);
         loginAPI("facebook", response.accessToken, response.id, response.name, response.email);
     }
     const responseGoogle = (response) => {

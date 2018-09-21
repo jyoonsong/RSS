@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactStars from 'react-stars';
-import SwipeToDelete from 'react-swipe-to-delete-component';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronCircleDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
@@ -52,7 +51,7 @@ class Restaurant extends Component {
                 <div className="list-item">
                     <div className="list-item-main">
                         <div className="list-item-media"
-                             style={{backgroundImage: "url('" + image + "')"}}>
+                             style={{backgroundImage: "url('" + encodeURI(image) + "')"}}>
                         </div>
                         <div className="list-item-content">
                             <h4 className="list-item-heading">{name}
@@ -67,7 +66,7 @@ class Restaurant extends Component {
                                 </a>
                             </div>
                             <ReactStars count={5}
-                                    size={43}
+                                    size={42}
                                     value={value}
                                     onChange={onStarChange}
                                     color1={'#e9ecef'}
